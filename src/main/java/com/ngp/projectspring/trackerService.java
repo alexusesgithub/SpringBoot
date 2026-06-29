@@ -2,6 +2,9 @@ package com.ngp.projectspring;
 
 import com.ngp.projectspring.entities.tracker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,5 +32,9 @@ public class trackerService {
     public String deleteTracker(int id){
         tr.deleteById(id);
         return "Deleted successfully";
+    }
+    public Page<tracker> getAllTrackerPages(int page, int size){
+        Pageable pg = PageRequest.of(page, size);
+        return tr.findAll(pg);
     }
 }

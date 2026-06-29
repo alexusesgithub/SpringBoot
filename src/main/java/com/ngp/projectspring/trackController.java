@@ -1,6 +1,8 @@
 package com.ngp.projectspring;
 import com.ngp.projectspring.entities.tracker;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,7 @@ public class trackController {
     @Autowired
     private trackerService ts;
     @PostMapping("/create")
-    ResponseEntity createUser(@RequestBody tracker t)
+    ResponseEntity createUser(@Valid @RequestBody tracker t)
     {
         return new ResponseEntity<>(ts.createTracker(t), HttpStatus.CREATED);
     }
@@ -34,5 +36,11 @@ public class trackController {
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id){
         return ts.deleteTracker(id);
+    }
+
+    @GetMapping("/page")
+    public Page<tracker> getAllPages(@RequestParam int page, @RequestParam int size)
+    {
+        return ts.getAllTrackerPages(page,size);
     }
 }
