@@ -1,5 +1,6 @@
-package com.ngp.projectspring;
+package com.ngp.projectspring.Service;
 
+import com.ngp.projectspring.Repository.trackerRepository;
 import com.ngp.projectspring.entities.tracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
